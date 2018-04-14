@@ -27,8 +27,6 @@ class HemSuperClient:
 
 
 	def sendRequest(self, apiCall):
-
-		#Send a request to UDP server in HEMApp with API Call
 		self.sock.sendto(apiCall.encode('utf8'), self.serverAddress)
 
 
@@ -51,9 +49,6 @@ class HemSuperClient:
 				errorResponse['TYPE'] = 'ERROR'
 				errorResponse['VALUE'] = 'INVALID REQUEST'
 				self.parsedData = json.dumps(errorResponse)
-				#return self.parsedData, self.addr
-			#Returns a dict with a key value pair and a tuple
-			#return self.parsedData, self.addr
 			self.publisher.dispatch(self.parsedData, self.addr)
 
 	def subscribe(self, callback):
