@@ -124,9 +124,8 @@ def getEnergyUsedAndProduced():
 	# TO DO
 	# Fill up with real values
 	metrics['energyProduced'] = random.randint(2000,11000)
-	metrics['eneryConsumed'] = random.randint(4000,10000)
-	print(metrics)
-	return jsonify(metrics)
+	metrics['energyConsumed'] = random.randint(4000,10000)
+	return json.dumps(metrics)
     
 @app.route('/getCurrentNodePowerValues')
 def getNodePowerValues():
