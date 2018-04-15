@@ -55,12 +55,14 @@
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
   <div class="small-box bg-green">
-    <div class="inner">
-      <h3>$69</h3>
-      <p>Savings</p>
+    <div class="inner" id='outerdiv'>
+      <b>Fun fact</b>
+	  <p id='suggestion'>
+	  The world's largest coal producer is set to go solar in the next few decades. Sign of the times that we all need to be more mindful going ahead!
+	  </p>
   </div>
   <div class="icon">
-      <i class="ion-social-usd"></i>
+      <i class="ion-ios-sunny"></i>
   </div>
 </div>
 </div>
@@ -514,8 +516,24 @@ function redrawChart()
 	
 }
 
+function updateSuggestions()
+{
+	var items = Array(
+	"Did you know The Beach Boys wanted to save our oceans from pollution? Listen to what they had to say in 'Don't Go Near The Water'",
+	"A big shoutout to the village of Pasanga for going solar and empowering the women in their community!",
+	"Climate change is not as new a fact as we think it to be - it has been with us forever.",
+	"Digitization, decentralization, and disruption - IoT is changing energy trends of the present and the future.",
+	"What can the arctic ice sheet tell us about the past, present and future of the climate of our world? Apparently, a lot!"
+	)
+	var item = items[Math.floor(Math.random()*items.length)];
+	$('#suggestion').animate({'opacity': 0}, 400, function(){
+        $(this).html(item).animate({'opacity': 1}, 400);    
+    });
+}
+
 // Set up perodic calls
 setInterval(redrawChart, 5000); // Every 5 seconds, fire a request
+setInterval(updateSuggestions, 4000); // Every 5 seconds, fire a request
 </script>
 
   {% endblock body %}
