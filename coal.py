@@ -39,6 +39,7 @@ class EnerHackCommunicator:
         self.power = [[0]*8]
 
         self.cloudcover_energy = []
+        self.prevday = datetime.date.today() - datetime.timedelta(1)
         self.poll()
 
     def setNewMode(self, mode):
@@ -79,6 +80,7 @@ class EnerHackCommunicator:
             return
 
     def getToggleStatus(self):
+        time.sleep(1)
         with open('nodestatus.txt', 'r') as f:
             nodes = f.readlines()
             print ('nodes to be toggled are - ', nodes)
@@ -197,10 +199,30 @@ class EnerHackCommunicator:
 
 
     def writeTrendsFor7Days(self):
-        power , cloudcover = pv.get_irradiance(time=datetime.datetime.now() - datetime.timedelta(10) + datetime.timedelta(hours=-5), intervals_of_3=8)
 
-        print (power, cloudcover)
+        p = []
+        cc = []
 
+        if self.prevday == datetime.date.today():
+            return
+
+        for i in range(6):
+            power , cloudcover = pv.get_irradiance(time=datetime.date.today() + datetime.timedelta(i+1) + datetime.timedelta(hours=-5), intervals_of_3=8)
+
+            for po in power[2:9]:
+                p.append(po)
+
+            for c in cloudcover[2:9]:
+                cc.append(c)
+
+        with open('next6days.txt', 'w') as f:
+            towrite = ''
+            for i in range(len(p)):
+                towrite += str(cc[i]) + ':' + str(p[i]) + ','
+
+            f.write(towrite[:-1]+'\n')
+
+        f.close()
 
     def poll(self):
         # Default turn atleast one light on
@@ -239,20 +261,23 @@ class EnerHackCommunicator:
                     print ('Going to turn on node ', n.num)
                     self.hemSuperClient.sendRequest(API_ON_PRE + str(n.num))
 
+            self.writePowerUpdates()
             self.writeSuggestions()
             self.writeCurrPower()
 
             print ('Done.')
-            time.sleep(10)
+            time.sleep(3)
 
     def onReceive(self, message, address):
         # {u'NODE': u'ALL', u'TYPE': u'DCPOWER', u'VALUE': [0.185, 5.9, 85.6, 10.4, 0, 0, 0, 12.5]} ('192.168.1.236', 9931)
 
-        #print ('Received a message')
+        print ('Received a message')
         print(message['VALUE'])
         totalPower = sum(message['VALUE'])
         print("Total power consumption: " + str(totalPower))
-        self.power.append(message['VALUE'])
-        self.writePowerUpdates()
+
+        if len(message['VALUE']) == 8:
+            print (message['VALUE'])
+            self.power.append(message['VALUE'])
 
 obj = EnerHackCommunicator()
