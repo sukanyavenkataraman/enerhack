@@ -1,0 +1,392 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+{{ super() }}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+      Dashboard 
+  </h1>
+  <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Dashboard</li>
+  </ol>
+</section>
+
+<section class="content">
+  <!-- Small boxes (Stat box) -->
+  <div class="row">
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-red">
+        <div class="inner">
+          <h3>Meh</h3>
+          <p>Mode</p>
+      </div>
+      <div class="icon">
+          <i class="ion-speedometer"></i>
+      </div>
+  </div>
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-aqua">
+    <div class="inner">
+      <h3>72<sup style="font-size: 20px">%</sup></h3>
+
+      <p>Battery</p>
+  </div>
+  <div class="icon">
+      <i class="ion-battery-half"></i>
+  </div>
+</div>
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-blue">
+    <div class="inner">
+      <h3>14H 23M</h3>
+
+      <p>Estimated Time Remaining</p>
+  </div>
+  <div class="icon">
+      <i class="ion-ios-timer"></i>
+  </div>
+</div>
+</div>
+<!-- ./col -->
+<!-- ./col -->
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-green">
+    <div class="inner">
+      <h3>$69</h3>
+
+      <p>Savings</p>
+  </div>
+  <div class="icon">
+      <i class="ion-social-usd"></i>
+  </div>
+</div>
+</div>
+<!-- ./col -->
+</div>
+<!-- /.row -->
+<!-- Main row -->
+<div class="row">
+    <!-- Left col -->
+    <section class="col-lg-7 connectedSortable">
+      <!-- Custom tabs (Charts with tabs)-->
+      <div class="nav-tabs-custom">
+        <!-- Tabs within a box -->
+        <ul class="nav nav-tabs pull-right">
+          <li class="active"><a href="#revenue-chart" data-toggle="tab">Usage</a></li>
+          <li class="pull-left header"><i class="ion-android-bulb"></i> Power Consumption</li>
+      </ul>
+      <div class="tab-content no-padding">
+          <!-- Morris chart - Sales -->
+          <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
+      </div>
+  </div>
+  <!-- /.nav-tabs-custom -->
+
+<!-- /.box (chat box) -->
+
+<!-- TO DO List -->
+<div class="box box-primary">
+    <div class="box-header">
+      <i class="ion-android-funnel"></i>
+
+      <h3 class="box-title"> Device Priority</h3>
+</div>
+<!-- /.box-header -->
+<div class="box-body">
+  <ul class="todo-list">
+    <li>
+      <!-- drag handle -->
+      <span class="handle">
+        <i class="fa fa-ellipsis-v"></i>
+        <i class="fa fa-ellipsis-v"></i>
+    </span>
+    <!-- checkbox -->
+    <!-- todo text -->
+    <span class="text">Hall (TV, Chandelier)</span>
+    <!-- Emphasis label -->
+    <!-- General tools such as edit or delete-->
+    <div class="tools">
+        <i class="fa fa-edit"></i>
+        <i class="fa fa-trash-o"></i>
+    </div>
+</li>
+<li>
+  <span class="handle">
+    <i class="fa fa-ellipsis-v"></i>
+    <i class="fa fa-ellipsis-v"></i>
+</span>
+<span class="text">Kitchen (Microwave, Fridge)</span>
+<div class="tools">
+    <i class="fa fa-edit"></i>
+    <i class="fa fa-trash-o"></i>
+</div>
+</li>
+<li>
+  <span class="handle">
+    <i class="fa fa-ellipsis-v"></i>
+    <i class="fa fa-ellipsis-v"></i>
+</span>
+<span class="text">Porch (Lights)</span>
+<div class="tools">
+    <i class="fa fa-edit"></i>
+    <i class="fa fa-trash-o"></i>
+</div>
+</li>
+<li>
+  <span class="handle">
+    <i class="fa fa-ellipsis-v"></i>
+    <i class="fa fa-ellipsis-v"></i>
+</span>
+<span class="text">Bedroom (Lights, AC)</span>
+<div class="tools">
+    <i class="fa fa-edit"></i>
+    <i class="fa fa-trash-o"></i>
+</div>
+</li>
+<li>
+  <span class="handle">
+    <i class="fa fa-ellipsis-v"></i>
+    <i class="fa fa-ellipsis-v"></i>
+</span>
+<span class="text">Study (Printer, Computer)</span>
+<div class="tools">
+    <i class="fa fa-edit"></i>
+    <i class="fa fa-trash-o"></i>
+</div>
+</li>
+<li>
+  <span class="handle">
+    <i class="fa fa-ellipsis-v"></i>
+    <i class="fa fa-ellipsis-v"></i>
+</span>
+<span class="text">Garage (Tesla)</span>
+<div class="tools">
+    <i class="fa fa-edit"></i>
+    <i class="fa fa-trash-o"></i>
+</div>
+</li>
+<li>
+  <span class="handle">
+    <i class="fa fa-ellipsis-v"></i>
+    <i class="fa fa-ellipsis-v"></i>
+</span>
+<span class="text">Laundry</span>
+<div class="tools">
+    <i class="fa fa-edit"></i>
+    <i class="fa fa-trash-o"></i>
+</div>
+</li>
+<li>
+  <span class="handle">
+    <i class="fa fa-ellipsis-v"></i>
+    <i class="fa fa-ellipsis-v"></i>
+</span>
+<span class="text">Bathroom</span>
+<div class="tools">
+    <i class="fa fa-edit"></i>
+    <i class="fa fa-trash-o"></i>
+</div>
+</li>
+</ul>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+
+</section>
+<!-- /.Left col -->
+<!-- right col (We are only adding the ID to make the widgets sortable)-->
+<section class="col-lg-5 connectedSortable">
+
+<!-- /.box -->
+
+<!-- Calendar -->
+<div class="box box-solid bg-aqua-gradient">
+    <div class="box-header">
+      <i class="fa fa-umbrella"></i>
+    <!-- /. tools -->
+</div>
+<!-- /.box-header -->
+<div class="box-body no-padding">
+  <!--The calendar -->
+  <iframe id="forecast_embed" frameborder="0" height="245" width="100%" src="//forecast.io/embed/#lat=43.059032&lon=-89.401159&name=Madison"></iframe>
+</div>
+</div>
+
+<div class="box box-solid bg-green-gradient">
+    <div class="box-header">
+	  <h5>Toggle</h5>
+	</div>
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div id = "hall" class="small-box bg-green">
+	<div class="inner" onclick="element=document.getElementById('hall');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+                    'url' : '/toggleNode?node=0',
+                    'type' : 'GET',
+					'success' : function(data) {
+                       if (data == 'success') {
+                            console.log('Success')
+                       }
+                    }
+                });">    
+      <h4>Hall</h4>
+	    <div class="icon-small">
+			<i class="ion-android-desktop"></i>
+		</div>
+	</div>
+</div>
+</div>
+<div  class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div id="kitchen" class="small-box bg-green">
+	<div class="inner" onclick="element=document.getElementById('kitchen');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+                    'url' : '/toggleNode?node=1',
+                    'type' : 'GET',
+					'success' : function(data) {
+                       if (data == 'success') {
+                            console.log('Success')
+                       }
+                    }
+                });">    
+      <h4>Kitchen</h4>
+	    <div class="icon-small">
+			<i class="ion-coffee"></i>
+		</div>
+  </div>
+</div>
+</div>
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div id="porch" class="small-box bg-green">
+	<div class="inner" onclick="element=document.getElementById('porch');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+                    'url' : '/toggleNode?node=2',
+                    'type' : 'GET',
+					'success' : function(data) {
+                       if (data == 'success') {
+                            console.log('Success')
+                       }
+                    }
+                });"> 
+      <h4>Porch</h4>
+	    <div class="icon-small">
+			<i class="ion-android-home"></i>
+		</div>
+  </div>
+</div>
+</div>
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div id='bedroom' class="small-box bg-green">
+	<div class="inner" onclick="element=document.getElementById('bedroom');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+                    'url' : '/toggleNode?node=3',
+                    'type' : 'GET',
+					'success' : function(data) {
+                       if (data == 'success') {
+                            console.log('Success')
+                       }
+                    }
+                });"> 
+      <h4>Bedroom</h4>
+	    <div class="icon-small">
+			<i class="ion-ios-cloudy-night"></i>
+		</div>
+  </div>
+</div>
+</div>
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div id="study" class="small-box bg-green">
+	<div class="inner" onclick="element=document.getElementById('study');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+                    'url' : '/toggleNode?node=4',
+                    'type' : 'GET',
+					'success' : function(data) {
+                       if (data == 'success') {
+                            console.log('Success')
+                       }
+                    }
+                });">    
+      <h4>Study</h4>
+	    <div class="icon-small">
+			<i class="ion-android-print"></i>
+		</div>
+  </div>
+</div>
+</div>
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div id='garage' class="small-box bg-green">
+	<div class="inner" onclick="element=document.getElementById('garage');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+                    'url' : '/toggleNode?node=5',
+                    'type' : 'GET',
+					'success' : function(data) {
+                       if (data == 'success') {
+                            console.log('Success')
+                       }
+                    }
+                });">    
+      <h4>Garage</h4>
+	    <div class="icon-small">
+			<i class="ion-model-s"></i>
+		</div>
+  </div>
+</div>
+</div>
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div  id='bathroom' class="small-box bg-green">
+	<div class="inner" onclick="element=document.getElementById('bathroom');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+                    'url' : '/toggleNode?node=6',
+                    'type' : 'GET',
+					'success' : function(data) {
+                       if (data == 'success') {
+                            console.log('Success')
+                       }
+                    }
+                });">   
+      <h4>Bathroom</h4>
+	    <div class="icon-small">
+			<i class="ion-funnel"></i>
+		</div>
+  </div>
+</div>
+</div>
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div id='laundry' class="small-box bg-green">
+	<div class="inner" onclick="element=document.getElementById('laundry');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+                    'url' : '/toggleNode?node=7',
+                    'type' : 'GET',
+					'success' : function(data) {
+                       if (data == 'success') {
+                            console.log('Success')
+                       }
+                    }
+                });">    
+      <h4>Laundry</h4>
+	    <div class="icon-small">
+			<i class="ion-tshirt"></i>
+		</div>
+  </div>
+</div>
+</div>
+</div>
+<!-- /.box -->
+
+</section>
+<!-- right col -->
+</div>
+<!-- /.row (main row) -->
+
+</section>
+
+  {% endblock body %}
