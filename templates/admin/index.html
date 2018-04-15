@@ -16,15 +16,15 @@
 <section class="content">
   <!-- Small boxes (Stat box) -->
   <div class="row">
-    <div class="col-lg-3 col-xs-6">
+    <div onMouseOver="this.style.cursor='pointer'" class="col-lg-3 col-xs-6" data-toggle="modal" data-target="#myModal">
       <!-- small box -->
-      <div class="small-box bg-red">
+      <div id='modeClass' class="small-box bg-yellow">
         <div class="inner">
-          <h3>Meh</h3>
-          <p>Mode</p>
+          <h3 id='modeText'>Meh</h3>
+          <p>Energy Mode</p>
       </div>
       <div class="icon">
-          <i class="ion-speedometer"></i>
+          <i id='modeIcon' class="ion-social-freebsd-devil"></i>
       </div>
   </div>
 </div>
@@ -230,7 +230,7 @@
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
   <div id = "hall" class="small-box bg-green">
-	<div class="inner" onclick="element=document.getElementById('hall');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+	<div class="inner" onMouseOver="this.style.cursor='pointer'" onclick="element=document.getElementById('hall');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
                     'url' : '/toggleNode?node=0',
                     'type' : 'GET',
 					'success' : function(data) {
@@ -249,7 +249,7 @@
 <div  class="col-lg-3 col-xs-6">
   <!-- small box -->
   <div id="kitchen" class="small-box bg-green">
-	<div class="inner" onclick="element=document.getElementById('kitchen');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+	<div class="inner" onMouseOver="this.style.cursor='pointer'" onclick="element=document.getElementById('kitchen');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
                     'url' : '/toggleNode?node=1',
                     'type' : 'GET',
 					'success' : function(data) {
@@ -268,7 +268,7 @@
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
   <div id="porch" class="small-box bg-green">
-	<div class="inner" onclick="element=document.getElementById('porch');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+	<div class="inner" onMouseOver="this.style.cursor='pointer'" onclick="element=document.getElementById('porch');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
                     'url' : '/toggleNode?node=2',
                     'type' : 'GET',
 					'success' : function(data) {
@@ -287,7 +287,7 @@
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
   <div id='bedroom' class="small-box bg-green">
-	<div class="inner" onclick="element=document.getElementById('bedroom');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+	<div class="inner" onMouseOver="this.style.cursor='pointer'" onclick="element=document.getElementById('bedroom');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
                     'url' : '/toggleNode?node=3',
                     'type' : 'GET',
 					'success' : function(data) {
@@ -306,7 +306,7 @@
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
   <div id="study" class="small-box bg-green">
-	<div class="inner" onclick="element=document.getElementById('study');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+	<div class="inner" onMouseOver="this.style.cursor='pointer'" onclick="element=document.getElementById('study');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
                     'url' : '/toggleNode?node=4',
                     'type' : 'GET',
 					'success' : function(data) {
@@ -325,7 +325,7 @@
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
   <div id='garage' class="small-box bg-green">
-	<div class="inner" onclick="element=document.getElementById('garage');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+	<div class="inner" onMouseOver="this.style.cursor='pointer'" onclick="element=document.getElementById('garage');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
                     'url' : '/toggleNode?node=5',
                     'type' : 'GET',
 					'success' : function(data) {
@@ -344,7 +344,7 @@
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
   <div  id='bathroom' class="small-box bg-green">
-	<div class="inner" onclick="element=document.getElementById('bathroom');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+	<div class="inner" onMouseOver="this.style.cursor='pointer'" onclick="element=document.getElementById('bathroom');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
                     'url' : '/toggleNode?node=6',
                     'type' : 'GET',
 					'success' : function(data) {
@@ -363,12 +363,12 @@
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
   <div id='laundry' class="small-box bg-green">
-	<div class="inner" onclick="element=document.getElementById('laundry');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
+	<div class="inner" onMouseOver="this.style.cursor='pointer'" onclick="element=document.getElementById('laundry');if(element.className=='small-box bg-green'){element.className='small-box bg-red'}else if(element.classname='small-box bg-red'){element.className='small-box bg-green'}$.ajax({
                     'url' : '/toggleNode?node=7',
                     'type' : 'GET',
 					'success' : function(data) {
                        if (data == 'success') {
-                            console.log('Success')
+                            console.log('Success');
                        }
                     }
                 });">    
@@ -388,5 +388,98 @@
 <!-- /.row (main row) -->
 
 </section>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <center><h4 class="modal-title"><b>Energy Mode</b></h4></center>
+      </div>
+      <div class="modal-body">
+	  <center>
+		<div class="col-lg-12 col-xs-6" onMouseOver="this.style.cursor='pointer'" onclick="changeMode(1)" data-dismiss="modal">
+			  <!-- small box -->
+			  <div class="small-box bg-green">
+				<div class="inner">
+				  <h3>Super Saver</h3>
+				  <p>Go green!</p>
+			  </div>
+			  <div class="icon">
+				  <i class="ion-leaf"></i>
+			  </div>
+			</div>
+		</div>
+		<div class="col-lg-12 col-xs-6" onMouseOver="this.style.cursor='pointer'" onclick="changeMode(2)" data-dismiss="modal">
+			  <!-- small box -->
+			  <div class="small-box bg-yellow">
+				<div class="inner">
+				  <h3>Meh</h3>
+				  <p>Whatever, you decide.</p>
+			  </div>
+			  <div class="icon">
+				  <i class="ion-social-freebsd-devil"></i>
+			  </div>
+			</div>
+		</div>
+		<div class="col-lg-12 col-xs-6" onMouseOver="this.style.cursor='pointer'" onclick="changeMode(3)" data-dismiss="modal">
+			  <!-- small box -->
+			  <div class="small-box bg-red">
+				<div class="inner">
+				  <h3>I'm a Coal Miner</h3>
+				  <p>Planet? What planet?</p>
+			  </div>
+			  <div class="icon">
+				  <i class="ion-fireball"></i>
+			  </div>
+			</div>
+		</div>	
+		</center>		
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+function changeMode(mode)
+{
+	newMode = ""
+	if(mode==1)
+	{
+		$('#modeClass').attr("class","small-box bg-green");
+		$('#modeText').html("Super Saver");
+		$('#modeIcon').attr("class","ion-leaf");
+		newMode = 'supersaver';
+	}
+	else if(mode==2)
+	{
+		$('#modeClass').attr("class","small-box bg-yellow");
+		$('#modeText').html("Meh");
+		$('#modeIcon').attr("class","ion-social-freebsd-devil");
+		newMode = 'meh';
+	}
+	else if(mode==3)
+	{
+		$('#modeClass').attr("class","small-box bg-red");
+		$('#modeText').html("I'm a Coal Miner");
+		$('#modeIcon').attr("class","ion-fireball");
+		newMode = 'coalminer';
+	}
+	
+	$.ajax({
+		type: "GET",
+		url: '/changeEnergyMode?mode='+newMode,
+		'success' : function(data) {
+		   if (data == 'success') {
+				console.log('Success');
+		   }
+		}
+	});
+	
+}
+</script>
 
   {% endblock body %}
