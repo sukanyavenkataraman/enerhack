@@ -9,7 +9,7 @@ from pvlib.forecast import GFS
 
 latitude, longitude, tzo = 44.801817, -69.890908, 'US/Central'
 
-def get_irradiance(lat=latitude, lon=longitude, tz=tzo, intervals_of_3=1, time=datetime.datetime.now()):
+def get_irradiance(lat=latitude, lon=longitude, tz=tzo, intervals_of_3=1, time=datetime.datetime.now()+datetime.timedelta(hours=-5)):
     start = pd.Timestamp(time, tz=tz)
 
     end = start + pd.Timedelta(hours=3 * intervals_of_3)
@@ -33,7 +33,7 @@ def get_irradiance(lat=latitude, lon=longitude, tz=tzo, intervals_of_3=1, time=d
     irrads = model.cloud_cover_to_irradiance(data['total_clouds'], how='clearsky_scaling')
 
     # change this to list when taking more than one values
-    return (irrads.ghi.values.tolist()[0]), (data['total_clouds'].values[0] / 100)
+    return (irrads.ghi.values.tolist()), (data['total_clouds'].values / 100)
 
 
 if __name__ == "__main__":

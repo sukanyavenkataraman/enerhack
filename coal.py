@@ -70,6 +70,7 @@ class EnerHackCommunicator:
                     except:
                         break
                     break
+                f.flush()
                 f.close()
 
             with open('modestatus.txt', 'w') as f:
@@ -87,6 +88,7 @@ class EnerHackCommunicator:
                    self.setSwitchStatus(node, setopp=True)
                except:
                    break
+            f.flush()
         f.close()
 
         with open('nodestatus.txt', 'w') as f:
@@ -109,6 +111,7 @@ class EnerHackCommunicator:
                            pri.append(node)
                        except:
                            break
+                f.flush()
                 f.close()
 
             with open('prioritystatus.txt', 'w') as f:
@@ -130,7 +133,7 @@ class EnerHackCommunicator:
 
                     if len(parts) == 2:
                         self.setNewSleepTime(int(parts[0]), int(parts[1]))
-
+                f.flush()
                 f.close()
 
             with open('sleeptime.txt', 'w') as f:
@@ -148,18 +151,15 @@ class EnerHackCommunicator:
                     for i in range(len(self.power[-1])):
                         toprint += str(allnodes[i].status) +':' +str(self.power[-1][i]) + ','
                     f.write(toprint[:-1]+'\n')
-                f.close()
+
+                    with open('powerusagestatus_all.txt', 'a+') as f1:
+                        f1.write(toprint[:-1]+'\n')
+                        f1.flush()
+                    f1.close()
+                f.flush()
+            f.close()
         except:
             print ('nothing to append?')
-            return
-
-    def writeCurrentNodeStatus(self):
-        try:
-            with open('currnodestatus.txt', 'w') as f:
-                for n in self.usage_modes.nodes:
-                    f.write(str(n.num) + ',' + str(n.status))
-                f.close()
-        except:
             return
 
     def writeSuggestions(self):
@@ -181,18 +181,31 @@ class EnerHackCommunicator:
                     if max_usage > 10:
                         node = self.usage_modes[-1].index(max_usage)
                         f.write('Expect a drop in power supply... Maybe you could think about switching off '+ str(self.nodeToEquip[node + 1])+ '\n')
-
+            f.flush()
             f.close()
 
+    def writeCurrPower(self):
+        try:
+            with open('energystatus.txt', 'a+') as f:
+                totenergy = sum(self.power[-1][:])
+
+                f.write(str(self.cloudcover_energy[-1][0])+','+str(self.cloudcover_energy[-1][1])+','+str(totenergy))
+                f.write('\n')
+                f.close()
+        except:
+            return
+
+
     def writeTrendsFor7Days(self):
-        power , cloudcover = pv.get_irradiance(time=datetime.date.today(), intervals_of_3=8)
+        power , cloudcover = pv.get_irradiance(time=datetime.datetime.now() - datetime.timedelta(10) + datetime.timedelta(hours=-5), intervals_of_3=8)
 
         print (power, cloudcover)
+
+
     def poll(self):
         # Default turn atleast one light on
 
-        #self.writeTrendsFor7Days()
-        #return
+        self.writeTrendsFor7Days()
 
         while (1):
             print ('Sending request')
@@ -202,7 +215,7 @@ class EnerHackCommunicator:
             month = datetime.datetime.now().month
 
             currPower, cloudCover  = pv.get_irradiance()
-            self.cloudcover_energy.append((cloudCover, currPower))
+            self.cloudcover_energy.append((cloudCover[0], currPower[0]+100))
             #cloudCover = 0.5
             #currPower = 100  # Change this to get it from pvlib
             print (cloudCover, currPower)
@@ -213,7 +226,7 @@ class EnerHackCommunicator:
             self.getNewMode()
 
             print ('Going to configure a mode...')
-            self.usage_modes.modeSelect(self.mode, cloudCover, currPower, hour, month, self.power)
+            self.usage_modes.modeSelect(self.mode, cloudCover[0], currPower[0]+100, hour, month, self.power)
 
             # Turn off/on based on what we just did
             print ('Going to now turn on and off based on what we calculated...')
@@ -227,9 +240,10 @@ class EnerHackCommunicator:
                     self.hemSuperClient.sendRequest(API_ON_PRE + str(n.num))
 
             self.writeSuggestions()
+            self.writeCurrPower()
 
             print ('Done.')
-            time.sleep(3)
+            time.sleep(10)
 
     def onReceive(self, message, address):
         # {u'NODE': u'ALL', u'TYPE': u'DCPOWER', u'VALUE': [0.185, 5.9, 85.6, 10.4, 0, 0, 0, 12.5]} ('192.168.1.236', 9931)

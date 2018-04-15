@@ -54,7 +54,7 @@ class UserModes(object):
     def setSwitchStatus(self, node, status, setopp=False):
         for n in self.nodes:
             if n.num == node:
-                n.status = status if not setopp else not n.status
+                n.status = status if not setopp else int(not n.status)
 
     def modeSelect(self, mode, cloudcover, availenergy, hour, month, usage):
 
