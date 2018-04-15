@@ -75,10 +75,11 @@
         <ul class="nav nav-tabs pull-right">
           <li class="active"><a href="#power-chart" data-toggle="tab">Usage</a></li>
           <li class="pull-left header"><i class="ion-android-bulb"></i> Power Consumption</li>
+		  <li><a href="#forecast-chart" data-toggle="tab">Forecast</a></li>
 		</ul>
       <div class="tab-content no-padding">
-          <!-- Morris chart - Sales -->
           <div class="chart tab-pane active" id="power-chart" style="position: relative; height: 300px;"></div>
+		  <div class="chart tab-pane" id="forecast-chart" style="position: relative; height: 300px;"></div>
       </div>
 	</div>
   <!-- /.nav-tabs-custom -->
@@ -626,9 +627,65 @@ function updateSuggestions()
          }
       }
    }); 
-   
-
 }
+
+  var line = new Morris.Line({
+    element: 'forecast-chart',
+    resize: true,
+    data: [
+      {day: '2011 Q1', item1: 312.848703223},
+      {day: '2011 Q2', item1: 273.192473193},
+      {day: '2011 Q3', item1: 24.1331795899},
+	  {day: '2011 Q4', item1: 236.872646168},
+      {day: '2012 Q1', item1: 312.848703223},
+      {day: '2012 Q2', item1: 238.300549787},
+	  {day: '2012 Q3', item1: 308.381318718},
+	  {day: '2012 Q4', item1: 203.006668126},
+	  {day: '2012 Q1', item1: 19.7362684814},
+	  {day: '2012 Q2', item1: 239.700274301},
+	  {day: '2012 Q3', item1: 309.49141401},
+	  {day: '2012 Q4', item1: 245.747421143},
+    ],
+    xkey: 'day',
+    ykeys: ['item1'],
+    labels: ['Energy Forecast'],
+    lineColors: ['red'],
+    lineWidth: 2,
+    hideHover: 'auto',
+    gridTextColor: "#fff",
+    gridStrokeWidth: 0.4,
+    pointSize: 4,
+    pointStrokeColors: ["red"],
+    gridLineColor: "red",
+    gridTextFamily: "Open Sans",
+    gridTextSize: 10
+  });
+  /*
+item1: 236.872646168
+item1: 312.848703223
+item1: 273.192473193
+item1: 24.1331795899
+item1: 238.300549787
+item1: 308.381318718
+item1: 203.006668126
+item1: 19.7362684814
+item1: 239.700274301
+item1: 309.49141401
+item1: 245.747421143
+item1: 23.0020270775
+item1: 241.071565163
+item1: 321.902407739
+item1: 311.751297918
+item1: 28.8102850379
+item1: 625.082326983
+item1: 686.652946671
+item1: 290.339137284
+item1: 26.520916302
+item1: 302.570785904
+item1: 346.880572933
+item1: 210.978107582
+item1: 22.8088132891
+*/
 
 // Set up perodic calls
 setInterval(redrawChart, 5000); // Every 5 seconds, fire a request
