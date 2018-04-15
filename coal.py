@@ -187,7 +187,7 @@ class EnerHackCommunicator:
     def writeTrendsFor7Days(self):
         power , cloudcover = pv.get_irradiance(time=datetime.date.today(), intervals_of_3=8)
 
-        print power, cloudcover
+        print (power, cloudcover)
     def poll(self):
         # Default turn atleast one light on
 

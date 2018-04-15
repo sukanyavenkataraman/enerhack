@@ -132,7 +132,7 @@ def getEnergyUsedAndProduced():
 def getNodePowerValues():
 	# status:power
 	with open('powerusagestatus.txt', 'r') as f:
-		line = f.read()
+		line = f_read.readlines()[-1]
         f.close()
 	return line
 	
