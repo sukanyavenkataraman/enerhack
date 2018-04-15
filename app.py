@@ -145,7 +145,15 @@ def getSuggestions():
 		line = f.read()
 	return line
 
-	
+'''
+@app.route('/getEneryStatusNext6Days')
+def getSuggestions():
+	with open('next6days.txt', 'r') as f:
+		line = f.read()
+        
+	return line
+'''
+
 # Create admin
 admin = flask_admin.Admin(
     app,
