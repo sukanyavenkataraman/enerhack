@@ -37,6 +37,7 @@ class EnerHackCommunicator:
         self.hemSuperClient.subscribe(self.onReceive)
         self.power = [[0]*8]
 
+        self.cloudcover_energy = []
         self.poll()
 
     def setNewMode(self, mode):
@@ -45,13 +46,14 @@ class EnerHackCommunicator:
     def setNewPriorityList(self, priorityList):
         for i in range(len(priorityList)):
             self.usage_modes.setPriority(priorityList[i], i+1)
+        self.usage_modes.sortNodes()
 
     def setNewSleepTime(self, node, sleeptime):
         self.usage_modes.setSleepTimes(node, sleeptime)
 
     def setSwitchStatus(self, node, status=0, setopp=False):
         print (node, status, setopp)
-        self.usage_modes.setSwitchStatus(node, status if not setopp else not self.usage_modes.nodes[node].status)
+        self.usage_modes.setSwitchStatus(node, status, setopp)
 
     def getUsageStatus(self):
         return self.power
@@ -84,9 +86,11 @@ class EnerHackCommunicator:
                    self.setSwitchStatus(node, setopp=True)
                except:
                    break
-            f.close()
+        f.close()
+
         with open('nodestatus.txt', 'w') as f:
-            f.close()
+            pass
+        f.close()
 
     def getPriorityStatus(self):
         try:
@@ -135,7 +139,7 @@ class EnerHackCommunicator:
 
     def writePowerUpdates(self):
         try:
-            with open('prioritystatus.txt', 'a+') as f:
+            with open('powerusagestatus.txt', 'a+') as f:
                 f.write(str(self.power[-1])+'\n')
                 f.close()
         except:
@@ -150,6 +154,27 @@ class EnerHackCommunicator:
         except:
             return
 
+    def writeSuggestions(self):
+        with open('suggestions.txt', 'a+') as f:
+            if len(self.cloudcover_energy) > 1:
+                if self.cloudcover_energy[-1][0] < 60:
+                    f.write('HIGH ALERT!!! Very low power supply for the next 3 hours' + '\n')
+
+                if self.cloudcover_energy[-1][0] - self.cloudcover_energy[-2][0] < -0.3:
+                    max_usage = max(self.usage_modes[-1][:])
+                    if max_usage > 20:
+                        node = self.usage_modes[-1].index(max_usage)
+                        f.write('Cloudy hours ahead! Maybe you could think about switching off '+ str(self.nodeToEquip[node+1]) + '\n')
+
+                if self.cloudcover_energy[-1][1] - self.cloudcover_energy[-2][1] < -20:
+                    max_usage = max(self.usage_modes[-1][:])
+                    if max_usage > 10:
+                        node = self.usage_modes[-1].index(max_usage)
+                        f.write('Expect a drop in power supply... Maybe you could think about switching off '+ str(self.nodeToEquip[node + 1])+ '\n')
+
+            f.close()
+
+
     def poll(self):
         # Default turn atleast one light on
 
@@ -161,7 +186,7 @@ class EnerHackCommunicator:
             month = datetime.datetime.now().month
 
             cloudCover, currPower = pv.get_irradiance()
-
+            self.cloudcover_energy.append((cloudCover, currPower))
             #cloudCover = 0.5
             #currPower = 100  # Change this to get it from pvlib
             print (cloudCover, currPower)
@@ -185,6 +210,9 @@ class EnerHackCommunicator:
                     print ('Going to turn on node ', n.num)
                     self.hemSuperClient.sendRequest(API_ON_PRE + str(n.num))
 
+            self.writeSuggestions()
+
+            print ('Done.')
             time.sleep(3)
 
     def onReceive(self, message, address):
