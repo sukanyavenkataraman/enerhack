@@ -10,7 +10,7 @@ from flask_admin.contrib import sqla
 from flask_admin import helpers as admin_helpers
 import random
 import json
-from Collections import defaultdict
+from collections import defaultdict
 
 
 # Create Flask application
@@ -132,10 +132,9 @@ def getEnergyUsedAndProduced():
 def getNodePowerValues():
 	# status:power
 	with open('powerusagestatus.txt', 'r') as f:
-        f.seek(os.SEEK_END)
-		line = f.readlines()[-1]
+		line = f.read()
         f.close()
-	print(line)
+	return line
 	
 # Create admin
 admin = flask_admin.Admin(
