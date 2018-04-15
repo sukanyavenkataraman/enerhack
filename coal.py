@@ -39,6 +39,7 @@ class EnerHackCommunicator:
         self.power = [[0]*8]
 
         self.cloudcover_energy = []
+        self.prevday = datetime.date.today() - datetime.timedelta(1)
         self.poll()
 
     def setNewMode(self, mode):
@@ -197,10 +198,31 @@ class EnerHackCommunicator:
 
 
     def writeTrendsFor7Days(self):
-        power , cloudcover = pv.get_irradiance(time=datetime.datetime.now() - datetime.timedelta(10) + datetime.timedelta(hours=-5), intervals_of_3=8)
 
+        power = []
+        cloudcover = []
+
+        if self.prevday == datetime.date.today():
+            return
+
+        else:
+            for i in range(6):
+                p , cc = pv.get_irradiance(time=datetime.date.today() + datetime.timedelta(i+1) + datetime.timedelta(hours=-5), intervals_of_3=8)
+
+                for each in p[2:8]:
+                    power.append(each)
+                for each in cc[2:8]:
+                    cloudcover.append(each)
+
+            with open('next6days.txt', 'w') as f:
+                towrite = ''
+                for i in range(len(power)):
+                    towrite += str(cloudcover[i]) + ':' + str(power[i]) + ','
+                f.write(towrite[:-1]+'\n')
+            f.close()
+
+        self.prevday = datetime.date.today()
         print (power, cloudcover)
-
 
     def poll(self):
         # Default turn atleast one light on
@@ -243,7 +265,7 @@ class EnerHackCommunicator:
             self.writeCurrPower()
 
             print ('Done.')
-            time.sleep(10)
+            time.sleep(3)
 
     def onReceive(self, message, address):
         # {u'NODE': u'ALL', u'TYPE': u'DCPOWER', u'VALUE': [0.185, 5.9, 85.6, 10.4, 0, 0, 0, 12.5]} ('192.168.1.236', 9931)
