@@ -145,6 +145,7 @@ $(function () {
     lineColors: ['#a0d0e0', '#3c8dbc'],
     hideHover: 'auto'
   });
+  
   var line = new Morris.Line({
     element: 'line-chart',
     resize: true,

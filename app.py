@@ -1,5 +1,6 @@
 import os
 from flask import Flask, url_for, redirect, render_template, request, abort
+from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security, SQLAlchemyUserDatastore, \
     UserMixin, RoleMixin, login_required, current_user
@@ -7,6 +8,7 @@ from flask_security.utils import encrypt_password
 import flask_admin
 from flask_admin.contrib import sqla
 from flask_admin import helpers as admin_helpers
+import random
 
 
 # Create Flask application
@@ -102,7 +104,6 @@ def toggleNode():
 
 @app.route('/changeEnergyMode')
 def toggleMode():
-    # here we want to get the value of user (i.e. ?user=some-value)
     newMode = request.args.get('mode')
     
 	# TODO
@@ -110,6 +111,16 @@ def toggleMode():
     
     return("success")	
 	
+@app.route('/getCurrentEnergyUsedAndProduced')
+def getEnergyUsedAndProduced():
+	metrics = dict()
+	# TO DO
+	# Fill up with real values
+	metrics['energyProduced'] = random.randint(2000,11000)
+	metrics['eneryConsumed'] = random.randint(4000,10000)
+	print(metrics)
+	return jsonify(metrics)
+    
 # Create admin
 admin = flask_admin.Admin(
     app,
