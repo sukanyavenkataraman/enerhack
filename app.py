@@ -9,6 +9,8 @@ import flask_admin
 from flask_admin.contrib import sqla
 from flask_admin import helpers as admin_helpers
 import random
+import json
+from Collections import defaultdict
 
 
 # Create Flask application
@@ -128,9 +130,12 @@ def getEnergyUsedAndProduced():
     
 @app.route('/getCurrentNodePowerValues')
 def getNodePowerValues():
-	metrics = dict()
-	
-	return jsonify(metrics)
+	# status:power
+	with open('powerusagestatus.txt', 'r') as f:
+        f.seek(os.SEEK_END)
+		line = f.readlines()[-1]
+        f.close()
+	print(line)
 	
 # Create admin
 admin = flask_admin.Admin(

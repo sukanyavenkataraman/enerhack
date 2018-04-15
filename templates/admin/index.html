@@ -61,9 +61,6 @@
 	  The world's largest coal producer is set to go solar in the next few decades. Sign of the times that we all need to be more mindful going ahead!
 	  </p>
   </div>
-  <div class="icon">
-      <i class="ion-ios-sunny"></i>
-  </div>
 </div>
 </div>
 <!-- ./col -->
@@ -516,6 +513,19 @@ function redrawChart()
 	
 }
 
+function getNodePowerValues()
+{
+	$.ajax({
+		type: "GET",
+		url: '/getCurrentNodePowerValues',
+		'success' : function(data) {
+			jsonObject = JSON.parse(data);
+			console.log(jsonObject);
+			
+		}
+	});
+}
+
 function updateSuggestions()
 {
 	var items = Array(
@@ -533,7 +543,8 @@ function updateSuggestions()
 
 // Set up perodic calls
 setInterval(redrawChart, 5000); // Every 5 seconds, fire a request
-setInterval(updateSuggestions, 4000); // Every 5 seconds, fire a request
+setInterval(updateSuggestions, 4000); // Every 4 seconds, fire a request
+setInterval(getNodePowerValues, 4000); // Every 4 seconds, fire a request
 </script>
 
   {% endblock body %}
