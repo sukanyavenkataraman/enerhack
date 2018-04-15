@@ -84,16 +84,50 @@
   <!-- /.nav-tabs-custom -->
 <!-- /.box -->
 <!-- Weather -->
-<div class="box box-solid bg-aqua-gradient">
-    <div class="box-header">
-      <i class="fa fa-umbrella"></i>
-    <!-- /. tools -->
+<div class="box col-sm-12 box-solid bg-black" onclick="startVideo1()">
+    <div class="row">                                     
+        <div class="col-sm-4">                 
+			<video id="video1" width="250" height="250">
+			  <source src="/static/img/clear_color.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>
+        </div>                  
+        <div class="col-sm-4">
+			<video id="video2" width="250" height="250">
+			  <source src="/static/img/clear_cloud.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>
+        </div>    
+		<div class="col-sm-4">
+			<video id="video3" width="250" height="250">
+			  <source src="/static/img/clear_sun.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>            
+        </div> 
+    </div>
 </div>
-<!-- /.box-header -->
-<div class="box-body no-padding">
-  <!--The calendar -->
-  <iframe id="forecast_embed" frameborder="0" height="245" width="100%" src="//forecast.io/embed/#lat=43.059032&lon=-89.401159&name=Madison"></iframe>
-</div>
+
+<div class="box col-sm-12 box-solid bg-black" onclick="startVideo2()">
+    <div class="row">                                     
+        <div class="col-sm-4">                 
+			<video id="video4" width="250" height="250">
+			  <source src="/static/img/cloudy_color.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>
+        </div>                  
+        <div class="col-sm-4">
+			<video id="video5" width="250" height="250">
+			  <source src="/static/img/cloudy_cloud.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>
+        </div>    
+		<div class="col-sm-4">
+			<video id="video6" width="250" height="250">
+			  <source src="/static/img/cloudy_sun.mp4" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>            
+        </div> 
+    </div>
 </div>
 
 </section>
@@ -521,8 +555,8 @@ function redrawChart()
             update();
 			
 			// Update cloud cover
-			$('#cloudcover').animate({'opacity': 0}, 400, function(){
-				$(this).html((parseFloat(jsonObject.cloudCover)*100).toString()+"%").animate({'opacity': 1}, 400);
+			$('#cloudcover').animate({'opacity': 0}, 200, function(){
+				$(this).html((parseFloat(jsonObject.cloudCover)*100).toString()+"%").animate({'opacity': 1}, 200);
 			});
 		
          }
@@ -539,7 +573,6 @@ function getNodePowerValues()
 			if(data.length > 0)
 			{
 				var values = data.split(',');
-				console.log(values);
 				for (var i = 0; i < values.length; i++) {
 					var myValues = values[i].split(":");
 					var key = 'node' + values.indexOf(values[i]).toString();
@@ -570,8 +603,8 @@ function updateFunFacts()
 	"What can the arctic ice sheet tell us about the past, present and future of the climate of our world? Apparently, a lot!"
 	)
 	var item = items[Math.floor(Math.random()*items.length)];
-	$('#funfact').animate({'opacity': 0}, 400, function(){
-        $(this).html(item).animate({'opacity': 1}, 400);    
+	$('#funfact').animate({'opacity': 0}, 200, function(){
+        $(this).html(item).animate({'opacity': 1}, 200);    
     });
 }
 
@@ -586,8 +619,8 @@ function updateSuggestions()
 			var current = $('#suggestion').html();
 			if(data != current)
 			{
-				$('#suggestion').animate({'opacity': 0}, 400, function(){
-					$(this).html(data).animate({'opacity': 1}, 400);
+				$('#suggestion').animate({'opacity': 0}, 200, function(){
+					$(this).html(data).animate({'opacity': 1}, 200);
 				});
 			}
          }
@@ -598,10 +631,24 @@ function updateSuggestions()
 }
 
 // Set up perodic calls
-setInterval(redrawChart, 5000); // Every 5 seconds, fire a request
-setInterval(updateFunFacts, 4000); // Every 4 seconds, fire a request
+setInterval(redrawChart, 2000); // Every 5 seconds, fire a request
+setInterval(updateFunFacts, 2000); // Every 4 seconds, fire a request
 setInterval(updateSuggestions, 10000); // Every 4 seconds, fire a request
-setInterval(getNodePowerValues, 4000); // Every 4 seconds, fire a request
+setInterval(getNodePowerValues, 2000); // Every 4 seconds, fire a request
+
+function startVideo1()
+{
+	document.getElementById("video1").play()
+	document.getElementById("video2").play()
+	document.getElementById("video3").play()
+}
+
+function startVideo2()
+{
+	document.getElementById("video4").play()
+	document.getElementById("video5").play()
+	document.getElementById("video6").play()
+}
 </script>
 
   {% endblock body %}
