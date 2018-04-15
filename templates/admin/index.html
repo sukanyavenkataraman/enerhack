@@ -29,8 +29,8 @@
   <!-- small box -->
   <div class="small-box bg-aqua">
     <div class="inner">
-      <h3>72<sup style="font-size: 20px">%</sup></h3>
-      <p>Battery</p>
+      <h3 id='cloudcover'>0<sup style="font-size: 20px">%</sup></h3>
+      <p>Cloud Cover</p>
   </div>
   <div class="icon">
       <i class="ion-battery-half"></i>
@@ -515,6 +515,10 @@ function redrawChart()
          {
             jsonObject = JSON.parse(data);
             update();
+			
+			// Update cloud cover
+			$('#cloudcover').html(jsonObject.cloudCover)
+			
          }
       }
    }); 
@@ -546,7 +550,6 @@ function getNodePowerValues()
 					}
 				}
 			}
-			
 		}
 	});
 }

@@ -17,6 +17,7 @@ from collections import defaultdict
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
+latestPowerConsumed = 0
 
 
 # Define models
@@ -121,10 +122,13 @@ def toggleMode():
 @app.route('/getCurrentEnergyUsedAndProduced')
 def getEnergyUsedAndProduced():
 	metrics = dict()
-	# TO DO
-	# Fill up with real values
-	metrics['energyProduced'] = random.randint(2000,11000)
-	metrics['energyConsumed'] = random.randint(4000,10000)
+	with open('energystatus.txt', 'r') as f:
+		line = f.readlines()[-1]
+        f.close()
+	cloudCover, energyProduced, energyConsumed = line.split(',')
+	metrics['cloudCover'] = cloudCover
+	metrics['energyProduced'] = energyProduced
+	metrics['energyConsumed'] = energyConsumed
 	return json.dumps(metrics)
     
 @app.route('/getCurrentNodePowerValues')
