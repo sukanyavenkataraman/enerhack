@@ -9,6 +9,8 @@ import flask_admin
 from flask_admin.contrib import sqla
 from flask_admin import helpers as admin_helpers
 import random
+import json
+from Collections import defaultdict
 
 
 # Create Flask application
@@ -111,10 +113,9 @@ def toggleNode():
 @app.route('/changeEnergyMode')
 def toggleMode():
     newMode = request.args.get('mode')
-    
-	# TODO
-	# Change mode
-    
+    with open('modestatus.txt', 'w') as f:
+        f.write(newMode)
+        f.close()
     return("success")	
 	
 @app.route('/getCurrentEnergyUsedAndProduced')
@@ -127,6 +128,15 @@ def getEnergyUsedAndProduced():
 	print(metrics)
 	return jsonify(metrics)
     
+@app.route('/getCurrentNodePowerValues')
+def getNodePowerValues():
+	# status:power
+	with open('powerusagestatus.txt', 'r') as f:
+        f.seek(os.SEEK_END)
+		line = f.readlines()[-1]
+        f.close()
+	print(line)
+	
 # Create admin
 admin = flask_admin.Admin(
     app,
