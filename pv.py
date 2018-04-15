@@ -33,7 +33,7 @@ def get_irradiance(lat, lon, tz):
     irrads = model.cloud_cover_to_irradiance(data['total_clouds'], how='clearsky_scaling')
 
     # change this to list when taking more than one values
-    print (irrads.ghi.tolist()[0])
+    return (irrads.ghi.tolist()[0]), (data['total_clouds'] / 100)
 
 
 if __name__ == "__main__":
