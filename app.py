@@ -111,10 +111,9 @@ def toggleNode():
 @app.route('/changeEnergyMode')
 def toggleMode():
     newMode = request.args.get('mode')
-    
-	# TODO
-	# Change mode
-    
+    with open('modestatus.txt', 'w') as f:
+        f.write(newMode)
+        f.close()
     return("success")	
 	
 @app.route('/getCurrentEnergyUsedAndProduced')
@@ -127,6 +126,12 @@ def getEnergyUsedAndProduced():
 	print(metrics)
 	return jsonify(metrics)
     
+@app.route('/getCurrentNodePowerValues')
+def getNodePowerValues():
+	metrics = dict()
+	
+	return jsonify(metrics)
+	
 # Create admin
 admin = flask_admin.Admin(
     app,
