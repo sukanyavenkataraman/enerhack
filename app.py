@@ -135,6 +135,13 @@ def getNodePowerValues():
         f.close()
 	return line
 	
+@app.route('/getSuggestions')
+def getSuggestions():
+	with open('suggestions.txt', 'r') as f:
+		line = f.read()
+	return line
+
+	
 # Create admin
 admin = flask_admin.Admin(
     app,

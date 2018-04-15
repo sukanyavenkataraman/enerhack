@@ -40,13 +40,12 @@
 <!-- ./col -->
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
-  <div class="small-box bg-blue">
-    <div class="inner">
-      <h3>14H 23M</h3>
-      <p>Estimated Time Remaining</p>
-  </div>
-  <div class="icon">
-      <i class="ion-ios-timer"></i>
+  <div class="small-box bg-purple">
+    <div class="inner" id='mydiv'>
+      <b>Suggestions</b>
+      <p id='suggestion'>
+	  Here are some tips to help you manage your bills!
+	  </p>
   </div>
 </div>
 </div>
@@ -527,21 +526,24 @@ function getNodePowerValues()
 		type: "GET",
 		url: '/getCurrentNodePowerValues',
 		'success' : function(data) {
-			var values = data.split(',');
-			console.log(values);
-			for (var i = 0; i < values.length; i++) {
-				var myValues = values[i].split(":");
-				var key = 'node' + values.indexOf(values[i]).toString();
-				var pkey = 'p'+key;
-				$('#'+pkey).html(myValues[1] + "W");
-				var mydiv = document.getElementById(key);
-				if(myValues[0] == '0')
-				{
-					mydiv.className = "small-box bg-green";
-				}
-				else
-				{
-					mydiv.className = "small-box bg-red";
+			if(data.length > 0)
+			{
+				var values = data.split(',');
+				console.log(values);
+				for (var i = 0; i < values.length; i++) {
+					var myValues = values[i].split(":");
+					var key = 'node' + values.indexOf(values[i]).toString();
+					var pkey = 'p'+key;
+					$('#'+pkey).html(myValues[1] + "W");
+					var mydiv = document.getElementById(key);
+					if(myValues[0] == '0')
+					{
+						mydiv.className = "small-box bg-green";
+					}
+					else
+					{
+						mydiv.className = "small-box bg-red";
+					}
 				}
 			}
 			
@@ -564,9 +566,32 @@ function updateFunFacts()
     });
 }
 
+function updateSuggestions()
+{
+   $.ajax({
+      type: "GET",
+      url: '/getSuggestions',
+      'success' : function(data) {
+         if(data.length > 0)
+         {
+			var current = $('#suggestion').html();
+			if(data != current)
+			{
+				$('#suggestion').animate({'opacity': 0}, 400, function(){
+					$(this).html(data).animate({'opacity': 1}, 400);
+				});
+			}
+         }
+      }
+   }); 
+   
+
+}
+
 // Set up perodic calls
 setInterval(redrawChart, 5000); // Every 5 seconds, fire a request
 setInterval(updateFunFacts, 4000); // Every 4 seconds, fire a request
+setInterval(updateSuggestions, 10000); // Every 4 seconds, fire a request
 setInterval(getNodePowerValues, 4000); // Every 4 seconds, fire a request
 </script>
 
