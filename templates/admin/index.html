@@ -33,7 +33,7 @@
       <p>Cloud Cover</p>
   </div>
   <div class="icon">
-      <i class="ion-battery-half"></i>
+      <i class="ion-cloud"></i>
   </div>
 </div>
 </div>
@@ -450,21 +450,21 @@ function changeMode(mode)
 		$('#modeClass').attr("class","small-box bg-green");
 		$('#modeText').html("Super Saver");
 		$('#modeIcon').attr("class","ion-leaf");
-		newMode = 'supersaver';
+		newMode = '1';
 	}
 	else if(mode==2)
 	{
 		$('#modeClass').attr("class","small-box bg-yellow");
 		$('#modeText').html("Meh");
 		$('#modeIcon').attr("class","ion-social-freebsd-devil");
-		newMode = 'meh';
+		newMode = '2';
 	}
 	else if(mode==3)
 	{
 		$('#modeClass').attr("class","small-box bg-red");
 		$('#modeText').html("I'm a Coal Miner");
 		$('#modeIcon').attr("class","ion-fireball");
-		newMode = 'coalminer';
+		newMode = '3';
 	}
 	
 	$.ajax({
@@ -486,6 +486,10 @@ function changeMode(mode)
 
     function data() {
         data_arr.push({y: new Date().getTime(), item1: jsonObject.energyProduced, item2: jsonObject.energyConsumed});
+		if(data_arr.length > 30)
+		{
+			data_arr.shift()
+		}
         return data_arr;
     }
 
@@ -498,9 +502,9 @@ function changeMode(mode)
     resize: true,
     data: data_arr,
     xkey: 'y',
-    ykeys: ['item1', 'item2'],
-    labels: ['Energy Generated (W)', 'Energy Consumed (W)'],
-    lineColors: ['green', 'red'],
+    ykeys: ['item2', 'item1'],
+    labels: ['Energy Consumed (W)', 'Energy Generated (W)'],
+    lineColors: ['red', 'green'],
     hideHover: 'auto'
   });
 
@@ -517,8 +521,10 @@ function redrawChart()
             update();
 			
 			// Update cloud cover
-			$('#cloudcover').html(jsonObject.cloudCover)
-			
+			$('#cloudcover').animate({'opacity': 0}, 400, function(){
+				$(this).html((parseFloat(jsonObject.cloudCover)*100).toString()+"%").animate({'opacity': 1}, 400);
+			});
+		
          }
       }
    }); 
