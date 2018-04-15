@@ -218,7 +218,7 @@ class EnerHackCommunicator:
         with open('next6days.txt', 'w') as f:
             towrite = ''
             for i in range(len(p)):
-                towrite += str(cc[i]) + ':' + str(p[i]) + ','
+                towrite += str(p[i]) + ','
 
             f.write(towrite[:-1]+'\n')
 
