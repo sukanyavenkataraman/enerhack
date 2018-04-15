@@ -530,6 +530,7 @@ function getNodePowerValues()
 		url: '/getCurrentNodePowerValues',
 		'success' : function(data) {
 			var values = data.split(',');
+			console.log(values);
 			for (var i = 0; i < values.length; i++) {
 				var myValues = values[i].split(":");
 				var key = 'node' + values.indexOf(values[i]).toString();
