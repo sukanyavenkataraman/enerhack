@@ -1,16 +1,18 @@
+import sys
+sys.path.append('/usr/local/lib/python2.7/site-packages')
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
+import pvlib
 from pvlib.forecast import GFS
-
 
 latitude, longitude, tzo = 44.801817, -69.890908, 'US/Central'
 
 # to change the return from value to list
 intervals_of_3 = 1
 
-
-def get_irradiance(lat, lon, tz):
+def get_irradiance(lat=latitude, lon=longitude, tz=tzo):
     start = pd.Timestamp(datetime.date.today(), tz=tz)
 
     end = start + pd.Timedelta(hours=3 * intervals_of_3)
@@ -33,7 +35,7 @@ def get_irradiance(lat, lon, tz):
     irrads = model.cloud_cover_to_irradiance(data['total_clouds'], how='clearsky_scaling')
 
     # change this to list when taking more than one values
-    return (irrads.ghi.tolist()[0]), (data['total_clouds'] / 100)
+    return (irrads.ghi.values.tolist()[0]), (data['total_clouds'].values[0] / 100)
 
 
 if __name__ == "__main__":

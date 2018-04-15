@@ -100,6 +100,12 @@ def toggleNode():
     # here we want to get the value of user (i.e. ?user=some-value)
     node = request.args.get('node')
     print(node)
+
+    with open('nodestatus.txt', 'a+') as f:
+        print ('Writing ', node, 'to file')
+        f.write(str(node))
+        f.write('\n')
+        f.close()
     return("success")
 
 @app.route('/changeEnergyMode')
