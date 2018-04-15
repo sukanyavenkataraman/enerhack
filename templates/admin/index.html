@@ -6,11 +6,7 @@
 <section class="content-header">
     <h1>
       Dashboard 
-  </h1>
-  <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Dashboard</li>
-  </ol>
+	</h1>
 </section>
 
 <section class="content">
@@ -34,7 +30,6 @@
   <div class="small-box bg-aqua">
     <div class="inner">
       <h3>72<sup style="font-size: 20px">%</sup></h3>
-
       <p>Battery</p>
   </div>
   <div class="icon">
@@ -48,7 +43,6 @@
   <div class="small-box bg-blue">
     <div class="inner">
       <h3>14H 23M</h3>
-
       <p>Estimated Time Remaining</p>
   </div>
   <div class="icon">
@@ -63,7 +57,6 @@
   <div class="small-box bg-green">
     <div class="inner">
       <h3>$69</h3>
-
       <p>Savings</p>
   </div>
   <div class="icon">
@@ -84,15 +77,31 @@
         <ul class="nav nav-tabs pull-right">
           <li class="active"><a href="#revenue-chart" data-toggle="tab">Usage</a></li>
           <li class="pull-left header"><i class="ion-android-bulb"></i> Power Consumption</li>
-      </ul>
+		</ul>
       <div class="tab-content no-padding">
           <!-- Morris chart - Sales -->
           <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
       </div>
-  </div>
+	</div>
   <!-- /.nav-tabs-custom -->
+<!-- /.box -->
+<!-- Weather -->
+<div class="box box-solid bg-aqua-gradient">
+    <div class="box-header">
+      <i class="fa fa-umbrella"></i>
+    <!-- /. tools -->
+</div>
+<!-- /.box-header -->
+<div class="box-body no-padding">
+  <!--The calendar -->
+  <iframe id="forecast_embed" frameborder="0" height="245" width="100%" src="//forecast.io/embed/#lat=43.059032&lon=-89.401159&name=Madison"></iframe>
+</div>
+</div>
 
-<!-- /.box (chat box) -->
+</section>
+<!-- /.Left col -->
+<!-- right col (We are only adding the ID to make the widgets sortable)-->
+<section class="col-lg-5 connectedSortable">
 
 <!-- TO DO List -->
 <div class="box box-primary">
@@ -201,31 +210,10 @@
 </div>
 <!-- /.box-body -->
 </div>
-<!-- /.box -->
-
-</section>
-<!-- /.Left col -->
-<!-- right col (We are only adding the ID to make the widgets sortable)-->
-<section class="col-lg-5 connectedSortable">
-
-<!-- /.box -->
-
-<!-- Calendar -->
-<div class="box box-solid bg-aqua-gradient">
-    <div class="box-header">
-      <i class="fa fa-umbrella"></i>
-    <!-- /. tools -->
-</div>
-<!-- /.box-header -->
-<div class="box-body no-padding">
-  <!--The calendar -->
-  <iframe id="forecast_embed" frameborder="0" height="245" width="100%" src="//forecast.io/embed/#lat=43.059032&lon=-89.401159&name=Madison"></iframe>
-</div>
-</div>
 
 <div class="box box-solid bg-green-gradient">
     <div class="box-header">
-	  <h5>Toggle</h5>
+	  <h5>Status</h5>
 	</div>
 <div class="col-lg-3 col-xs-6">
   <!-- small box -->
