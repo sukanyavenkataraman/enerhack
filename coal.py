@@ -6,6 +6,7 @@ import sys
 import time
 import datetime
 import pv
+import sendEmail
 
 sys.path.insert(1,'../')
 from module.hemSuperClient import HemSuperClient
@@ -140,9 +141,16 @@ class EnerHackCommunicator:
     def writePowerUpdates(self):
         try:
             with open('powerusagestatus.txt', 'a+') as f:
-                f.write(str(self.power[-1])+'\n')
+                if len(self.power[-1]) == 8:
+                    allnodes = self.usage_modes.nodes
+                    allnodes.sort(key=lambda n: n.num)
+                    toprint = ''
+                    for i in range(len(self.power[-1])):
+                        toprint += str(allnodes[i].status) +':' +str(self.power[-1][i]) + ','
+                    f.write(toprint[:-1]+'\n')
                 f.close()
         except:
+            print ('nothing to append?')
             return
 
     def writeCurrentNodeStatus(self):
@@ -157,8 +165,10 @@ class EnerHackCommunicator:
     def writeSuggestions(self):
         with open('suggestions.txt', 'a+') as f:
             if len(self.cloudcover_energy) > 1:
-                if self.cloudcover_energy[-1][0] < 60:
+                if self.cloudcover_energy[-1][1] < 0:
                     f.write('HIGH ALERT!!! Very low power supply for the next 3 hours' + '\n')
+                    sendEmail.sendEmail('HIGH ALERT!!! Going into disaster mode... ')
+                    self.mode = 4
 
                 if self.cloudcover_energy[-1][0] - self.cloudcover_energy[-2][0] < -0.3:
                     max_usage = max(self.usage_modes[-1][:])
@@ -174,9 +184,15 @@ class EnerHackCommunicator:
 
             f.close()
 
+    def writeTrendsFor7Days(self):
+        power , cloudcover = pv.get_irradiance(time=datetime.date.today(), intervals_of_3=8)
 
+        print power, cloudcover
     def poll(self):
         # Default turn atleast one light on
+
+        #self.writeTrendsFor7Days()
+        #return
 
         while (1):
             print ('Sending request')
@@ -185,7 +201,7 @@ class EnerHackCommunicator:
             hour = datetime.datetime.now().hour
             month = datetime.datetime.now().month
 
-            cloudCover, currPower = pv.get_irradiance()
+            currPower, cloudCover  = pv.get_irradiance()
             self.cloudcover_energy.append((cloudCover, currPower))
             #cloudCover = 0.5
             #currPower = 100  # Change this to get it from pvlib
@@ -218,7 +234,7 @@ class EnerHackCommunicator:
     def onReceive(self, message, address):
         # {u'NODE': u'ALL', u'TYPE': u'DCPOWER', u'VALUE': [0.185, 5.9, 85.6, 10.4, 0, 0, 0, 12.5]} ('192.168.1.236', 9931)
 
-        print ('Received a message')
+        #print ('Received a message')
         print(message['VALUE'])
         totalPower = sum(message['VALUE'])
         print("Total power consumption: " + str(totalPower))

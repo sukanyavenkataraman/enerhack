@@ -17,6 +17,7 @@ sys.path.insert(1,'../')
 from module.hemSuperClient import HemSuperClient
 import module.hemEmail
 
+'''
 hemSuperClient = HemSuperClient("192.168.1.159", 9931)
 
 def update(message, address):
@@ -27,7 +28,7 @@ def update(message, address):
 # The argument to this is the name of the function you want triggered when you get data
 hemSuperClient.subscribe(update)
 
-
+'''
 
 def sendEmail(data):
 
@@ -46,7 +47,7 @@ def sendEmail(data):
 
 	module.hemEmail.sendEmail(hemEmailAddr, hemPassword, 'ychockalinga@wisc.edu', 'Power Update', str(data))
 
-
+'''
 def main():
 
 	hemSuperClient.sendRequest("api/getacpoweractive/all")
@@ -54,4 +55,4 @@ def main():
 
 if __name__ == "__main__":
     main() 
-
+'''

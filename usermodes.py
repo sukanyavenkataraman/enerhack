@@ -136,7 +136,7 @@ class UserModes(object):
 
         currPower = sum(usage[-1][:])
 
-        print ('currPower is - ', currPower)
+        print ('currPower is - ', currPower, ' available power is - ', availPower)
         # Only energy to get under the max available
         if currPower >= availPower:
             print ('Energy usage is going over the limit, turning off some lights')

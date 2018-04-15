@@ -9,15 +9,13 @@ from pvlib.forecast import GFS
 
 latitude, longitude, tzo = 44.801817, -69.890908, 'US/Central'
 
-# to change the return from value to list
-intervals_of_3 = 1
-
-def get_irradiance(lat=latitude, lon=longitude, tz=tzo):
-    start = pd.Timestamp(datetime.date.today(), tz=tz)
+def get_irradiance(lat=latitude, lon=longitude, tz=tzo, intervals_of_3=1, time=datetime.datetime.now()):
+    start = pd.Timestamp(time, tz=tz)
 
     end = start + pd.Timedelta(hours=3 * intervals_of_3)
     irrad_vars = ['ghi', 'dni', 'dhi']
 
+    print (start, end)
     model = GFS()
     raw_data = model.get_data(lat, lon, start, end)
 
