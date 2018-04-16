@@ -172,7 +172,7 @@ class EnerHackCommunicator:
                     sendEmail.sendEmail('HIGH ALERT!!! Going into disaster mode... ')
                     self.mode = 4
 
-                if self.cloudcover_energy[-1][0] - self.cloudcover_energy[-2][0] < -0.3:
+                if self.cloudcover_energy[-1][0] < 0.3:
                     max_usage = max(self.usage_modes[-1][:])
                     if max_usage > 20:
                         node = self.usage_modes[-1].index(max_usage)
